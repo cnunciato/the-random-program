@@ -9,4 +9,6 @@ deciding for us. Every Thursday at a quarter past nine, a schedule CloudWatch ta
 sorts the list of kids randomly, and sends me a text message containing the result. (The
 kids call it "the random program", hence the name.)
 
+![image](https://user-images.githubusercontent.com/274700/64045122-6033ac00-cb1d-11e9-8fb9-8afa4a8b9204.png)
+
 Computers FTW.
