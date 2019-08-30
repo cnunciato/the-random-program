@@ -1,0 +1,12 @@
+{
+    "name": "the-random-program",
+    "devDependencies": {
+        "@types/node": "latest"
+    },
+    "dependencies": {
+        "@pulumi/aws": "^0.18.27",
+        "@pulumi/awsx": "^0.18.8",
+        "@pulumi/pulumi": "^0.17.28",
+        "twilio": "^3.33.4"
+    }
+}

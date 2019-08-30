@@ -1,0 +1,10 @@
+config:
+  aws:region: us-west-2
+  the-random-program:from_number:
+    secure: AAABAKldloDA8LF40if83aQC14jFUInsndSZo5gVlJ4pEH4x3WPahcpE
+  the-random-program:to_number:
+    secure: AAABADrIPa4nJ6NBktnIRYCatOnw2nfyO3fqCOQSz00gUVJ4fFbRKX/j
+  the-random-program:twilio_sid:
+    secure: AAABAArSLtlFsPbgOWUjycj3WghE7qLk0INhgMKp441+TEa6RJWnfcSFwsHzkpekEniLwmZXcccQcpXFibrDo1hj
+  the-random-program:twilio_token:
+    secure: AAABAHtVRFMQqGbGmiMGYtFrr09huxW6hzqQWvKICTAYkxoqCf4XTrDJiUkVy766/yNBrnc7hEMW72P/SRrLdg==
