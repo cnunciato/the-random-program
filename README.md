@@ -4,10 +4,12 @@ At our house, Thursday is video-game day. Each kid gets 35 minutes. Invariably, 
 unable to reach a consensus on the order in which to play, so they come running to me,
 seeking decision.
 
-Since I'm no great fan of decision in general, I wrote a little [Pulumi](https://pulumi.com/) program to do the
-deciding for us. Every Thursday at a quarter past nine, a scheduled [CloudWatch](https://aws.amazon.com/cloudwatch/) task runs,
-sorts the list of kids randomly, and sends me a text message containing the result (the
-kids call it "the random program", hence the name):
+Since I'm no great fan of decision in general, I wrote a little
+[Pulumi](https://pulumi.com/) program to do the deciding for us. Every Thursday at a
+quarter past nine, a scheduled [CloudWatch](https://aws.amazon.com/cloudwatch/) task runs,
+sorts the list of kids randomly, and sends me a text message containing the result, using
+only Amazon Web Services (specifically [Amazon SNS](aws.amazon.com/sns)) (the kids call it
+"the random program", hence the name):
 
 ![image](https://user-images.githubusercontent.com/274700/64045122-6033ac00-cb1d-11e9-8fb9-8afa4a8b9204.png)
 

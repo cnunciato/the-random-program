@@ -1,18 +1,13 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
-import * as twilio from "twilio";
+
+import { AWSError } from "aws-sdk";
+import { PublishResponse } from "aws-sdk/clients/sns";
 
 const config = new pulumi.Config();
 
-// Twilio account creds.
-const sid = config.require("twilio_sid");
-const token = config.require("twilio_token");
-
-// My SMS-enabled Twilio phone number.
-const from = `+1${config.require("from_number")}`;
-
 // My mobile number.
-const to = `+1${config.require("to_number")}`;
+const endpoint = `+1${config.require("to_number")}`;
 
 // Kid names.
 const kids = ["Oliver", "Sam", "Rosemary"];
@@ -23,11 +18,24 @@ const kids = ["Oliver", "Sam", "Rosemary"];
 // Every Thursday at 16:20 UTC.
 const schedule = "cron(16 20 ? * THU *)";
 
-aws.cloudwatch.onSchedule("schedule", schedule, () => {
-    const client = twilio(sid, token);
-    const body = `This week's game-playing order: ${kids.sort(() => Math.random() > 0.5 ? -1 : 1).join(", ")}. Yay! 🎉 🕹 👾`
+const topic = new aws.sns.Topic("topic");
+const sub = new aws.sns.TopicSubscription("sub", { protocol: "sms", endpoint, topic });
 
-    client.messages.create({ body, from, to })
-        .then(message => console.log(message.sid))
-        .catch(err => console.error(err));
+aws.cloudwatch.onSchedule("schedule", schedule, async () => {
+    const message = `This week's game-playing order: ${kids.sort(() => Math.random() > 0.5 ? -1 : 1).join(", ")}. Yay! 🎉 🕹 👾`;
+    const sns = new aws.sdk.SNS();
+
+    await sns.publish(
+        {
+            Message: message,
+            TopicArn: topic.arn.get(),
+        },
+        (error: AWSError, data: PublishResponse) => {
+            if (error) {
+                console.error(error.message);
+            } else {
+                console.log(data.MessageId);
+            }
+        }
+    ).promise();
 });
