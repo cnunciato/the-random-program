@@ -16,7 +16,7 @@ const kids = ["Oliver", "Sam", "Rosemary"];
 // const schedule = "rate(1 minute)";
 
 // Every Thursday at 16:20 UTC.
-const schedule = "cron(16 20 ? * THU *)";
+const schedule = "cron(20 16 ? * THU *)";
 
 const topic = new aws.sns.Topic("topic");
 const sub = new aws.sns.TopicSubscription("sub", { protocol: "sms", endpoint, topic });
